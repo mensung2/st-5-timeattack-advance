@@ -1,4 +1,4 @@
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { todoApi } from "../api/todos";
@@ -22,21 +22,22 @@ export default function TodoList() {
   const queryClient = useQueryClient();
   const handleLike = async (id, currentLiked) => {
     const previousTodos = [...todos];
-    try {
-      queryClient.setQueryData(["todos"], (prev) =>
-        prev.map((todo) =>
-          todo.id === id ? { ...todo, liked: !todo.liked } : todo,
-        ),
-      );
-      await todoApi.patch(`/todos/${id}`, {
-        liked: !currentLiked,
-      });
-    } catch (err) {
-      console.error(err);
-      queryClient.setQueryData(["todos"], previousTodos);
-    } finally {
-      refetch();
-    }
+
+    // try {
+    //   queryClient.setQueryData(["todos"], (prev) =>
+    //     prev.map((todo) =>
+    //       todo.id === id ? { ...todo, liked: !todo.liked } : todo
+    //     )
+    //   );
+    //   await todoApi.patch(`/todos/${id}`, {
+    //     liked: !currentLiked,
+    //   });
+    // } catch (err) {
+    //   console.error(err);
+    //   queryClient.setQueryData(["todos"], previousTodos);
+    // } finally {
+    //   refetch();
+    // }
   };
 
   if (isPending) {
