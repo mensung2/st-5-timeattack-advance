@@ -36,6 +36,7 @@ export default function Home() {
     );
   }
 
+  // const {} = useQuery(())
   return (
     <>
       <h2>서버통신 투두리스트 by useState</h2>
